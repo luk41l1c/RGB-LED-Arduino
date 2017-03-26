@@ -1,6 +1,7 @@
 /*
  * Author: Luka Ilic
  * E-mail: Luka_Bn@hotmail.com
+ * youtube.com/Luka9840
  * RGB LED common anode, common cathode and random color. 
  *
  */
