@@ -1,0 +1,68 @@
+/*
+ * Author: Luka Ilic
+ * E-mail: Luka_Bn@hotmail.com
+ * RGB LED common anode, common cathode and random color. 
+ *
+ */
+
+ //Define arduino pins (PWM)
+ const int red_pin = 11;
+ const int green_pin = 10;
+ const int blue_pin = 9;
+
+ //variables for random color
+ int r, g, b;
+
+ //If RGBL is with common anode uncomment: common_anode
+ //#define common_anode
+
+ void setup() {
+   pinMode(red_pin, OUTPUT);
+   pinMode(green_pin, OUTPUT);
+   pinMode(blue_pin, OUTPUT);
+
+   Serial.begin(9600);
+ }
+
+ void loop() {
+   /*
+    * If you want to use random_color(),  
+    * delete everything from loop, except random_color() and uncomment it.
+    *
+    */
+   //random_color();
+  
+   make_color(255, 0, 0); //red
+   delay(1000);
+   make_color(0, 255, 0); //green
+   delay(1000);
+   make_color(0, 0, 255); //blue
+   delay(1000);
+ }
+
+ void random_color() {
+   r = random(0, 255);
+   g = random(0, 255);
+   b = random(0, 255);
+   make_color(r, g, b);
+   delay(1000);
+ }
+
+ void make_color(int red, int green, int blue) {
+   #ifdef common_anode
+     red = 255 - red;
+     green = 255 - green;
+     blue = 255 - blue;
+   #endif
+  
+   //Serial monitor:
+   Serial.println("NEW LOOP");
+   Serial.println(red);
+   Serial.println(green);
+   Serial.println(blue);
+  
+   analogWrite(red_pin, red);
+   analogWrite(green_pin, green);
+   analogWrite(blue_pin, blue);
+ }
+
